@@ -12,7 +12,7 @@ import {
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 import userService from "../../utils/userService";
 import { useNavigate } from "react-router-dom";
-export default function SignUpPage({handleSignUpOrLogin}) {
+export default function SignUpPage({handleSignupOrLogin}) {
     
     //  The data that will be recieved by the SignUp form and stored in State
     const [userState, setUserState] = useState({
@@ -43,7 +43,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
         console.log(formData.forEach((item) => console.log(item)))
             await userService.signup(formData);
 
-            handleSignUpOrLogin();
+            handleSignupOrLogin();
             navigate('/')
             
         }
