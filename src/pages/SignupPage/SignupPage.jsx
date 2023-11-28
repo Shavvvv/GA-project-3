@@ -19,8 +19,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
         username: '',
         email: '',
         password: '',
-        passwordConf: '',
-        bio:''
+        passwordConf: ''
     });
 
     const [photo, setPhoto] = useState('')
@@ -40,7 +39,8 @@ export default function SignUpPage({handleSignUpOrLogin}) {
         }
         
 
-        try { 
+      try { 
+        console.log(formData.forEach((item) => console.log(item)))
             await userService.signup(formData);
 
             handleSignUpOrLogin();
@@ -107,12 +107,7 @@ export default function SignUpPage({handleSignUpOrLogin}) {
               onChange={handleChange}
               required
             />
-            <Form.TextArea
-              label="bio"
-              name="bio"
-              placeholder="Favorite Song"
-              onChange={handleChange}
-            />
+           
             <Form.Field>
               <Form.Input
                 type="file"

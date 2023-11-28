@@ -7,10 +7,10 @@ import SignUpPage from "./pages/SignupPage/SignupPage";
 
 import userService from "./utils/userService";
 function App() {
-  const [user, SetUser] = useState(userService.getUser());
+  const [user, setUser] = useState(userService.getUser());
 
   function handleSignupOrLogin() {
-    SetUser(userService.getUser());
+    setUser(userService.getUser());
   }
   return (
     <Routes>
