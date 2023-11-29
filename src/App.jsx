@@ -16,7 +16,7 @@ function App() {
   function handleSignupOrLogin() {
     setUser(userService.getUser());
   }
-  if(user){
+  
   return (
     <Routes>
     <Route path="/" element={<HomePage loggedUser={user}/>} />
@@ -26,7 +26,7 @@ function App() {
       /> 
   </Routes>
     );
-  }
+  
 }
 
 export default App;

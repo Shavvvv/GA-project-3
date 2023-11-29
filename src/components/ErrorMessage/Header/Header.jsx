@@ -1,11 +1,18 @@
+import { Header, Form, Button } from "semantic-ui-react";
+import userService from "../../../utils/userService";
 
-import { Header } from "semantic-ui-react";
+export default function PageHeader() {
+  function signOut() {
+    userService.logout();
+  }
 
-export default function Header()
-{
-    return (
-    
-        <Header> </Header>
-)
-
+  return (
+    <Header>
+      {" "}
+      Header
+      <Button onClick={signOut} type="submit">
+        logout
+      </Button>
+    </Header>
+  );
 }
