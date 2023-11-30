@@ -2,20 +2,39 @@ import { useState } from "react"
 
 import { Button, Form } from "semantic-ui-react"
 
-export default function AddPostForm() {
+import postApi from "../../utils/postApi"
+
+export default function AddPostForm({addPost}) {
 
     const [formState, setFormState] = useState({
         title: '',
         artist: '',
         album: ''
     })
+    const [photo, setPhoto] = useState('')
+    
 
     function handleSubmit(e) {
     
         e.preventDefault()
         console.log(formState)
+        const formData = new FormData();
+        formData.append('photo', photo);
+let i=1
+        for (let key in formState) {
+            console.log(i++, key, formState[key])
+            formData.append(key, formState[key])
+
+        }
+       
+          
+            addPost(formData)
+     
 }
 
+    function handleFile(e) {
+        setPhoto(e.target.files[0])
+    }
 
 
     function handleChange(e) {
@@ -52,6 +71,7 @@ export default function AddPostForm() {
                     placeholder="Album"
                    
                 />
+                <Form.Input onChange={handleFile}  type='file' />
 
 
                 <Button type="submit">

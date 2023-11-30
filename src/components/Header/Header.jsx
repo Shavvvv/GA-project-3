@@ -1,5 +1,5 @@
 import { Header, Form, Button } from "semantic-ui-react";
-import userService from "../../../utils/userService";
+import userService from "../../utils/userService";
 
 export default function PageHeader() {
   function signOut() {
