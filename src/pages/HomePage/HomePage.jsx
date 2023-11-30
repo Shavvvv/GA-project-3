@@ -2,9 +2,14 @@ import PageHeader from "../../components/Header/Header"
 import { useState, useEffect } from "react";
 import tokenService from "../../utils/tokenService";
 import AddPostForm from "../../components/AddPostForm/AddPostForm";
+import PostGallery from "../../components/PostGallery/PostGallery";
 export default function HomePage({loggedUser}) {
 
-        const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([]);
+    
+    useEffect(() => {
+        getPosts();
+    }, [])
 console.log({loggedUser})
 async function addPost(formData) {
         try {
@@ -33,12 +38,34 @@ async function addPost(formData) {
         }
     }
     
+    async function getPosts() {
+        try {
+          const response = await fetch("/api/post", {
+            method: "GET",
+            headers: {
+              // convention for sending jwts in a fetch request
+              Authorization: "Bearer " + tokenService.getToken(),
+              // We send the token, so the server knows who is making the
+              // request
+            },
+          });
+    
+          const data = await response.json();
+          // AFTER THIS WE HAVE THE DATA BACK FROM SERVER
+          // CHECK THE DATA then update state!
+          console.log(data);
+          setPosts(data.posts);
+        } catch (err) {
+          console.log(err);
+        }
+      }
  
     return (
             <>
         <PageHeader/>
                     <h1>Home Pageeeeeeeeeee</h1>
-                    <AddPostForm addPost={addPost} />
+            <AddPostForm addPost={addPost} />
+            <PostGallery posts={posts} />
 </>
         )
 }

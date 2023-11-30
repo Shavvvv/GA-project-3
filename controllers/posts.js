@@ -11,9 +11,21 @@ const s3 = new S3()
 const { v4: uuidv4 } = require('uuid');
 
 module.exports={
-    create
+  create,
+  index
 }
 
+async function index(req, res) {
+  try {
+    // this populates the user when you find the posts
+    // so you'll have access to the users information
+    // when you fetch teh posts
+    const posts = await Post.find({}).populate("user").exec();
+    res.status(200).json({ posts });
+  } catch (err) {
+    res.json({ error: err });
+  }
+}
 
 async function create(req, res) {
   console.log('////////////// async create function in posts controller')
