@@ -1,5 +1,5 @@
-import { Button } from "semantic-ui-react"
-export default function PostCard({ post, deletePost, loggedUser }) {
+import { Button, Card } from "semantic-ui-react"
+export default function PostCard({ post, deletePost, loggedUser , addLike }) {
 
 
     if (post.user._id === loggedUser._id) { 
@@ -22,28 +22,29 @@ export default function PostCard({ post, deletePost, loggedUser }) {
    console.log(postCreator)
    
     return (
-        <>
+        <Card>
            
             <br/>
             ----<br />
             {post.title}
             {post.artist}
             {post.album}
-            <img src={post.photoUrl} />
+            <img src={post.photoUrl}  />
             <br />
             
 
+            <Button  onClick={()=> addLike(post._id)} > Like</Button>
+
             {postCreator ?(
-                <Button> x</Button>
+               <Button onClick={() => deletePost(post._id)}> 
+               X
+           </Button>
             )  : null
           
         }
           
             
-        </>
+        </Card>
     )
 }
-/*
-<Button onClick={() => deletePost(post._id)}> 
-                X
-            </Button>*/
+

@@ -76,13 +76,36 @@ async function addPost(formData) {
     }
 
   }
+
+  async function addLike(postId) {
+    try {
+      const responseFromTheServer = await fetch(`/api/post/${postId}/likes`, {
+        method: "POST",
+        headers: {
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        },
+      });
+
+      const data = await responseFromTheServer.json(); // <- taking the json from server
+      // and turning into a regular object
+      console.log(data);
+      getPosts(); // < call getPOsts to get the updated posts from the server, this updates states
+      // so we can see our like
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
  
     return (
             <>
         <PageHeader/>
-                    <h1>Home Pageeeeeeeeeee</h1>
+            
             <AddPostForm addPost={addPost} />
-        <PostGallery posts={posts} deletePost={deletePost} loggedUser={loggedUser} />
+        <PostGallery posts={posts} deletePost={deletePost} loggedUser={loggedUser}  addLike={addLike} />
 </>
         )
 }
