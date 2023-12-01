@@ -1,9 +1,10 @@
-export default function PostCard({ post }) {
+import { Button } from "semantic-ui-react"
+export default function PostCard({ post, deletePost }) {
 
 
-    console.log( post)
+    console.log( `post ${post._id}`)
 
-
+   
    
     return (
         <>
@@ -15,7 +16,9 @@ export default function PostCard({ post }) {
             {post.album}
             <img src={post.photoUrl} />
             <br/>
-          
+            <Button  onClick={()=>deletePost(post._id)}> 
+                X
+          </Button>
         </>
     )
 }

@@ -58,14 +58,31 @@ async function addPost(formData) {
         } catch (err) {
           console.log(err);
         }
-      }
+    }
+  
+  
+  async function deletePost(postID) {
+    try { 
+      const response = await fetch(`/api/post/${postID}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + tokenService.getToken()
+        }
+      })
+      
+      getPosts()
+    } catch (err) {
+      
+    }
+
+  }
  
     return (
             <>
         <PageHeader/>
                     <h1>Home Pageeeeeeeeeee</h1>
             <AddPostForm addPost={addPost} />
-            <PostGallery posts={posts} />
+        <PostGallery posts={posts} deletePost={deletePost} />
 </>
         )
 }

@@ -12,7 +12,27 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports={
   create,
-  index
+  index,
+  delete: deletePost
+}
+
+async function deletePost(req, res) {
+
+  try {
+     const post = await Post.findOneAndDelete({
+       "_id": req.params.id,
+     
+     });
+    
+    
+    
+    
+    res.json({ data: '----delete worked' })
+    
+  } catch (error) {
+    res.json({error})
+  }
+  
 }
 
 async function index(req, res) {
