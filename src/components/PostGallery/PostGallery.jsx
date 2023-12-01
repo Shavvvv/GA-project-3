@@ -10,7 +10,7 @@ export default function PostGallery({ posts , deletePost, loggedUser, addLike}) 
  
     return (
         <Card.Group>
-            --All Posts----
+          
         <br/>
            {postCards}
         </Card.Group>

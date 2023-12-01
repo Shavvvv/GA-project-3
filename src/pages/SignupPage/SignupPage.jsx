@@ -69,10 +69,10 @@ export default function SignUpPage({handleSignupOrLogin}) {
 
     return (
     
-        <Grid textAlign="center" verticalAlign="middle">
+        <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh" }}>
             <Grid.Column>
             <Header>
-    Sign Up
+
        </Header>
                 <Form onSubmit={handleSubmit}>
                 <Segment stacked>

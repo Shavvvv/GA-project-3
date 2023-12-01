@@ -1,40 +1,44 @@
+# GA-Project3
 
-## Setup 
-
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv Mern-Vite-Boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls -a` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+# MERN Stack
 
 
-#### Setup your git repo
+ This is a social music  sharing web application made utilizing my knowlege of MERN stack development. Its purpose is allow you to share songs you like with others. The application also allows you to like posts by other users  as well. A user will have the ability to Create,view and delete posts, as well as like another post.
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
 
-it should look like this
+## Screenshot
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin main
-```
+![Mern-img](https://i.imgur.com/uZHsCBZ.png "Home Page")
 
-#### Setup the App
 
-```npm install```
+## Guide
 
-*DOTENV*
+1. You will be presented with the initial page requesting you to log in to continue. If not, you'll be prompted to signup
+2. Once logged in, you will have full access,with the ability  to view the posts made by other users and like post. 
 
-`touch .env`
 
-add your variables
 
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
 
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+
+## Key Technologies Used
+
+ * Mongoose
+ * MongoDB
+ * Express
+ * Express
+ * React
+ * Node
+ * Semantic-ui-react
+ * user authentication - JWT
+
+## Moving Forward...
+
+I plan on rendering the web app more functionality such as:
+* CLEAN UP CODE ---> sorry in advance @Megan @Jim
+* Clear the state of the Form after Post has been created.
+* Allowing the user to perform CRUD operations on their personal information, an throughout other aspects of the application.
+* A category option, where it will filter out different posts based on their genres
+* API Implementation to allow users search songs and use the data provided to autofill a post creation. 
+* Style Page 
+* Propper Navigation
+* Adding a profile page,  where you can see both the posts you've made, as well as your likes, so you can add the likes post to a "will listen to" list
