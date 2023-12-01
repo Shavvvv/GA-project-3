@@ -82,7 +82,7 @@ async function addPost(formData) {
         <PageHeader/>
                     <h1>Home Pageeeeeeeeeee</h1>
             <AddPostForm addPost={addPost} />
-        <PostGallery posts={posts} deletePost={deletePost} />
+        <PostGallery posts={posts} deletePost={deletePost} loggedUser={loggedUser} />
 </>
         )
 }

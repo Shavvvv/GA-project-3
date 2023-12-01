@@ -1,10 +1,25 @@
 import { Button } from "semantic-ui-react"
-export default function PostCard({ post, deletePost }) {
+export default function PostCard({ post, deletePost, loggedUser }) {
 
 
-    console.log( `post ${post._id}`)
+    if (post.user._id === loggedUser._id) { 
 
+             console.log( `post  maker ${post.user._id}`)
+     }
+     const postCreator = (post.user._id === loggedUser._id)
+    function showDELETE() {
    
+        if (postCreator) {
+            return (
+                <Button onClick={() => deletePost(post._id)}>
+                    X
+                </Button>
+            );
+        }
+
+}
+
+   console.log(postCreator)
    
     return (
         <>
@@ -15,10 +30,20 @@ export default function PostCard({ post, deletePost }) {
             {post.artist}
             {post.album}
             <img src={post.photoUrl} />
-            <br/>
-            <Button  onClick={()=>deletePost(post._id)}> 
-                X
-          </Button>
+            <br />
+            
+
+            {postCreator ?(
+                <Button> x</Button>
+            )  : null
+          
+        }
+          
+            
         </>
     )
 }
+/*
+<Button onClick={() => deletePost(post._id)}> 
+                X
+            </Button>*/
