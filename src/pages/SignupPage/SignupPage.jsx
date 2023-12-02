@@ -1,81 +1,63 @@
 import { useState } from "react";
-import {
-    Segment,
-    Grid,
-    Form,
-    Image,
-    Header,
-    Button
-    
-} from "semantic-ui-react";
+import { Segment, Grid, Form, Image, Header, Button } from "semantic-ui-react";
 
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
 import { useNavigate } from "react-router-dom";
-export default function SignUpPage({handleSignupOrLogin}) {
-    
-    //  The data that will be recieved by the SignUp form and stored in State
-    const [userState, setUserState] = useState({
-        username: '',
-        email: '',
-        password: '',
-        passwordConf: ''
+export default function SignUpPage({ handleSignupOrLogin }) {
+  //  Sign up State
+  const [userState, setUserState] = useState({
+    username: "",
+    email: "",
+    password: "",
+    passwordConf: "",
+  });
+
+  const [photo, setPhoto] = useState("");
+
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("photo", photo);
+
+    for (let key in userState) {
+      formData.append(key, userState[key]);
+    }
+
+    try {
+      console.log(formData.forEach((item) => console.log(item)));
+      await userService.signup(formData);
+
+      handleSignupOrLogin();
+      navigate("/");
+    } catch (err) {
+      console.log(err.message);
+      setError("Try Signing Up Again");
+    }
+  }
+
+  function handleChange(e) {
+    setUserState({
+      ...userState,
+      [e.target.name]: e.target.value,
     });
+  }
 
-    const [photo, setPhoto] = useState('')
+  function handleFileInput(e) {
+    console.log(e.target.files);
+    setPhoto(e.target.files[0]);
+  }
 
-    const [error, setError] = useState('');
-    
-    const navigate = useNavigate();
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('photo', photo)
-        
-
-        for (let key in userState) {
-            formData.append(key, userState[key])
-        }
-        
-
-      try { 
-        console.log(formData.forEach((item) => console.log(item)))
-            await userService.signup(formData);
-
-            handleSignupOrLogin();
-            navigate('/')
-            
-        }
-        catch (err) {
-            console.log(err.message);
-            setError("Try Signing Up Again")
-        }
-
-    }
-    
-    function handleChange(e){
-        setUserState({
-            ...userState,
-            [e.target.name]: e.target.value
-        })
-    }
-    
-    function handleFileInput(e) {
-        
-        console.log(e.target.files)
-        setPhoto(e.target.files[0])
-    }
-
-    return (
-    
-        <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh" }}>
-            <Grid.Column>
-            <Header>
-
-       </Header>
-                <Form onSubmit={handleSubmit}>
-                <Segment stacked>
+  return (
+    <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh" }}>
+      <Grid.Column>
+        <Header></Header>
+        <Form onSubmit={handleSubmit}>
+          <Segment stacked>
             <Form.Input
               name="username"
               placeholder="username"
@@ -107,7 +89,7 @@ export default function SignUpPage({handleSignupOrLogin}) {
               onChange={handleChange}
               required
             />
-           
+
             <Form.Field>
               <Form.Input
                 type="file"
@@ -119,15 +101,10 @@ export default function SignUpPage({handleSignupOrLogin}) {
             <Button type="submit" className="btn">
               Signup
             </Button>
-                    </Segment>
-                    {error ? <ErrorMessage error={error} />: null}
-                </Form>
-            </Grid.Column>
-</Grid>
-
-)
-
-
-
-
+          </Segment>
+          {error ? <ErrorMessage error={error} /> : null}
+        </Form>
+      </Grid.Column>
+    </Grid>
+  );
 }

@@ -16,18 +16,22 @@ export default function PostCard({ post, deletePost, loggedUser, addLike }) {
     <Card>
       <Card.Content> {post.title}</Card.Content>
 
-      <Card.Content>   <Image size="large" src={post.photoUrl} />
-      
-     </Card.Content>
+      <Card.Content>
+        {" "}
+        <Image size="large" src={post.photoUrl} />
+      </Card.Content>
       <Card.Content>{post.artist}</Card.Content>
+<Card.Content> {post.album}</Card.Content>
      
-      
-      {post.album}
-      <Card.Content> <Button onClick={() => addLike(post._id)}> Like</Button>
-      {postCreator ? (
-        <Button onClick={() => deletePost(post._id)}>X</Button>
-      ) : null} </Card.Content>
+      <Card.Content>
+        {" "}
+        <Button onClick={() => addLike(post._id)}> Like</Button>
+        {postCreator ? (
+          <Button onClick={() => deletePost(post._id)}>X</Button>
+        ) : null}{" "}
 
+       by: {post.user.username}
+      </Card.Content>
     </Card>
   );
 }

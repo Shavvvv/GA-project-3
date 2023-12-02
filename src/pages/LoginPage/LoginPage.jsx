@@ -1,92 +1,76 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import React from 'react';
-import './LoginPage.css';
+import React from "react";
+import "./LoginPage.css";
 
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { Grid, Message ,Form, Button } from 'semantic-ui-react';
+import { Grid, Message, Form, Button } from "semantic-ui-react";
 
+import userService from "../../utils/userService";
 
-import userService from '../../utils/userService';
-
-export default function LoginPage({handleSignupOrLogin}){
-   
+export default function LoginPage({ handleSignupOrLogin }) {
+  // User loging state
   const [userState, setUserState] = useState({
-    email: '',
-    password:''
-  })
+    email: "",
+    password: "",
+  });
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-  
     e.preventDefault();
 
     try {
-      
-      await userService.login(userState)
+      await userService.login(userState);
 
-      navigate('/');
+      navigate("/");
 
       handleSignupOrLogin();
-  
-
-
     } catch (err) {
-      console.log(err)
-      setError('check terminal and console')
+      console.log(err);
+      setError("check terminal and console");
     }
+  }
 
-
-
-
-
-}
-
-  
-    function handleChange(e) {
-      setUserState({
-        ...userState,
-        [e.target.name]:e.target.value
-      })
-    }
-
+  function handleChange(e) {
+    setUserState({
+      ...userState,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   return (
     <Grid>
       <Grid.Column>
         <Form onSubmit={handleSubmit}>
-          <Message>Login   Pageeeeee</Message>
+          <Message>Login</Message>
           <Form.Input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={userState.email}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              name="password"
-              type="password"
-              placeholder="password"
-              value={userState.password}
-              onChange={handleChange}
-              required
+            type="email"
+            name="email"
+            placeholder="email"
+            value={userState.email}
+            onChange={handleChange}
+            required
           />
-          
-          <Button type='submit' > Login</Button>
-      <Message>
-        <Link to="/signup" >
-        Sign Up
-        </Link>
-      </Message>
-      </Form>
-    </Grid.Column>
-    </Grid>
-      );
-}
+          <Form.Input
+            name="password"
+            type="password"
+            placeholder="password"
+            value={userState.password}
+            onChange={handleChange}
+            required
+          />
 
+          <Button type="submit"> Login</Button>
+          <Message>
+            <Link to="/signup">Sign Up</Link>
+          </Message>
+        </Form>
+      </Grid.Column>
+    </Grid>
+  );
+}
