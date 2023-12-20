@@ -17,15 +17,17 @@ function App() {
     setUser(userService.getUser());
   }
   
-  return (
-    <Routes>
-    <Route path="/" element={<HomePage loggedUser={user}/>} />
-      <Route path="/login" element={<LoginPage  handleSignupOrLogin={handleSignupOrLogin}/>} />
-      <Route path="/signup"
-        element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin} />}
-      /> 
-  </Routes>
+  if (user) {
+    return (
+      <Routes>
+        <Route path="/" element={<HomePage loggedUser={user} />} />
+        <Route path="/login" element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
+        <Route path="/signup"
+          element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin} />}
+        />
+      </Routes>
     );
+  }
   
 }
 
